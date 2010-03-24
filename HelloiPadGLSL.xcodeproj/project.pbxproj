@@ -11,27 +11,43 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		2514C27310084DB100A42282 /* ES2Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2514C27010084DB100A42282 /* ES2Renderer.m */; };
 		2514C27B10084DCA00A42282 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 2514C27910084DCA00A42282 /* Shader.fsh */; };
 		2514C27C10084DCA00A42282 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2514C27A10084DCA00A42282 /* Shader.vsh */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28FD14FE0DC6FC130079059D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FD14FD0DC6FC130079059D /* EAGLView.m */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
-		3142154E115900E800266E56 /* ColorFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 31421542115900E700266E56 /* ColorFragShader.fsh */; };
-		3142154F115900E800266E56 /* ColorVertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 31421543115900E800266E56 /* ColorVertShader.vsh */; };
-		31421550115900E800266E56 /* LightFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 31421544115900E800266E56 /* LightFragShader.fsh */; };
-		31421551115900E800266E56 /* LightVertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 31421545115900E800266E56 /* LightVertShader.vsh */; };
-		31421552115900E800266E56 /* NormalMapFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 31421546115900E800266E56 /* NormalMapFragShader.fsh */; };
-		31421553115900E800266E56 /* NormalMapVertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 31421547115900E800266E56 /* NormalMapVertShader.vsh */; };
-		31421554115900E800266E56 /* ParallaxMapFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 31421548115900E800266E56 /* ParallaxMapFragShader.fsh */; };
-		31421555115900E800266E56 /* ParallaxMapVertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 31421549115900E800266E56 /* ParallaxMapVertShader.vsh */; };
-		31421556115900E800266E56 /* TextureFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3142154A115900E800266E56 /* TextureFragShader.fsh */; };
-		31421557115900E800266E56 /* TextureVertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3142154B115900E800266E56 /* TextureVertShader.vsh */; };
-		31421558115900E800266E56 /* VertexColorFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3142154C115900E800266E56 /* VertexColorFragShader.fsh */; };
-		31421559115900E800266E56 /* VertexColorVertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3142154D115900E800266E56 /* VertexColorVertShader.vsh */; };
-		3142155C1159012700266E56 /* HelloShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3142155A1159012700266E56 /* HelloShader.fsh */; };
-		3142155D1159012700266E56 /* HelloShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3142155B1159012700266E56 /* HelloShader.vsh */; };
+		3122A43D115AE1EA00530BAD /* TEITextureShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3122A43B115AE1EA00530BAD /* TEITextureShader.fsh */; };
+		3122A43E115AE1EA00530BAD /* TEITextureShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3122A43C115AE1EA00530BAD /* TEITextureShader.vsh */; };
+		312405751226D49D0028D181 /* HelloiPadGLSLIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 312405741226D49D0028D181 /* HelloiPadGLSLIcon.png */; };
+		3130CFF9115AAD69006DB509 /* ShowST.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3130CFF7115AAD69006DB509 /* ShowST.fsh */; };
+		3130CFFA115AAD69006DB509 /* ShowST.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3130CFF8115AAD69006DB509 /* ShowST.vsh */; };
+		3149D32C115B93BA00923D85 /* Brick.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D311115B93BA00923D85 /* Brick.png */; };
+		3149D330115B93BA00923D85 /* Brick_mipmap_4.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 3149D315115B93BA00923D85 /* Brick_mipmap_4.pvr */; };
+		3149D331115B93BA00923D85 /* candycane_scalar_disk.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D316115B93BA00923D85 /* candycane_scalar_disk.png */; };
+		3149D332115B93BA00923D85 /* diagnostic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D317115B93BA00923D85 /* diagnostic.png */; };
+		3149D333115B93BA00923D85 /* dylan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D318115B93BA00923D85 /* dylan.png */; };
+		3149D334115B93BA00923D85 /* lena.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D319115B93BA00923D85 /* lena.png */; };
+		3149D335115B93BA00923D85 /* mandrill.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D31B115B93BA00923D85 /* mandrill.png */; };
+		3149D339115B93BA00923D85 /* mandrill_flipped_for_pvr_mip_4.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 3149D31F115B93BA00923D85 /* mandrill_flipped_for_pvr_mip_4.pvr */; };
+		3149D33A115B93BA00923D85 /* orientation.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D321115B93BA00923D85 /* orientation.png */; };
+		3149D33E115B93BA00923D85 /* orientation_flipped_for_pvr_mip_4.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 3149D325115B93BA00923D85 /* orientation_flipped_for_pvr_mip_4.pvr */; };
+		3149D33F115B93BA00923D85 /* swirl.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D327115B93BA00923D85 /* swirl.png */; };
+		3149D343115B93BA00923D85 /* swirl_flipped_for_pvr_mip_4.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 3149D32B115B93BA00923D85 /* swirl_flipped_for_pvr_mip_4.pvr */; };
+		3149D3DB115BA2CB00923D85 /* twitter_fail_whale.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D3DA115BA2CB00923D85 /* twitter_fail_whale.png */; };
+		318ACEC8115A653500537373 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 318ACEC7115A653500537373 /* EAGLViewController.m */; };
+		318ACEF5115A67D400537373 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318ACEF4115A67D400537373 /* EAGLViewController.xib */; };
+		3193109B115A89820052ABC0 /* HelloShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 31931099115A89820052ABC0 /* HelloShader.fsh */; };
+		3193109C115A89820052ABC0 /* HelloShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3193109A115A89820052ABC0 /* HelloShader.vsh */; };
+		319310BC115A89B90052ABC0 /* ES2Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 319310B8115A89B90052ABC0 /* ES2Renderer.m */; };
+		319310BD115A89B90052ABC0 /* TEIRendererHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 319310BB115A89B90052ABC0 /* TEIRendererHelper.m */; };
+		31A19EED115BDA2B0062EECE /* TEITexturePairShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 31A19EEB115BDA2B0062EECE /* TEITexturePairShader.fsh */; };
+		31A19EEE115BDA2B0062EECE /* TEITexturePairShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 31A19EEC115BDA2B0062EECE /* TEITexturePairShader.vsh */; };
+		31A912161163B8A000C28C26 /* TEITexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A912151163B8A000C28C26 /* TEITexture.m */; };
+		31ACC70A11A21C7E00BA9FC3 /* twitter_fail_whale_red_channnel_knockout.png in Resources */ = {isa = PBXBuildFile; fileRef = 31ACC70911A21C7E00BA9FC3 /* twitter_fail_whale_red_channnel_knockout.png */; };
+		31AD161B115ABAFF00FAF0CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31AD161A115ABAFF00FAF0CA /* CoreGraphics.framework */; };
+		31F59E87115A636F00E16F62 /* JLMMatrixLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31F59E83115A636F00E16F62 /* JLMMatrixLibrary.cpp */; };
+		31F59E88115A636F00E16F62 /* VectorMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31F59E85115A636F00E16F62 /* VectorMatrix.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,9 +56,6 @@
 		1D3623250D0F684500981E51 /* HelloiPadGLSLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloiPadGLSLAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* HelloiPadGLSL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloiPadGLSL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2514C26F10084DB100A42282 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ES2Renderer.h; path = Classes/ES2Renderer.h; sourceTree = "<group>"; };
-		2514C27010084DB100A42282 /* ES2Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ES2Renderer.m; path = Classes/ES2Renderer.m; sourceTree = "<group>"; };
-		2514C27110084DB100A42282 /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESRenderer.h; path = Classes/ESRenderer.h; sourceTree = "<group>"; };
 		2514C27910084DCA00A42282 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		2514C27A10084DCA00A42282 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -51,20 +64,45 @@
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		31421542115900E700266E56 /* ColorFragShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorFragShader.fsh; sourceTree = "<group>"; };
-		31421543115900E800266E56 /* ColorVertShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorVertShader.vsh; sourceTree = "<group>"; };
-		31421544115900E800266E56 /* LightFragShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = LightFragShader.fsh; sourceTree = "<group>"; };
-		31421545115900E800266E56 /* LightVertShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = LightVertShader.vsh; sourceTree = "<group>"; };
-		31421546115900E800266E56 /* NormalMapFragShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NormalMapFragShader.fsh; sourceTree = "<group>"; };
-		31421547115900E800266E56 /* NormalMapVertShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NormalMapVertShader.vsh; sourceTree = "<group>"; };
-		31421548115900E800266E56 /* ParallaxMapFragShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParallaxMapFragShader.fsh; sourceTree = "<group>"; };
-		31421549115900E800266E56 /* ParallaxMapVertShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParallaxMapVertShader.vsh; sourceTree = "<group>"; };
-		3142154A115900E800266E56 /* TextureFragShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = TextureFragShader.fsh; sourceTree = "<group>"; };
-		3142154B115900E800266E56 /* TextureVertShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = TextureVertShader.vsh; sourceTree = "<group>"; };
-		3142154C115900E800266E56 /* VertexColorFragShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VertexColorFragShader.fsh; sourceTree = "<group>"; };
-		3142154D115900E800266E56 /* VertexColorVertShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VertexColorVertShader.vsh; sourceTree = "<group>"; };
-		3142155A1159012700266E56 /* HelloShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HelloShader.fsh; sourceTree = "<group>"; };
-		3142155B1159012700266E56 /* HelloShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HelloShader.vsh; sourceTree = "<group>"; };
+		3122A43B115AE1EA00530BAD /* TEITextureShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = TEITextureShader.fsh; path = Shaders/TEITextureShader.fsh; sourceTree = "<group>"; };
+		3122A43C115AE1EA00530BAD /* TEITextureShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = TEITextureShader.vsh; path = Shaders/TEITextureShader.vsh; sourceTree = "<group>"; };
+		312405741226D49D0028D181 /* HelloiPadGLSLIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloiPadGLSLIcon.png; sourceTree = "<group>"; };
+		3130CFF7115AAD69006DB509 /* ShowST.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = ShowST.fsh; path = Shaders/ShowST.fsh; sourceTree = "<group>"; };
+		3130CFF8115AAD69006DB509 /* ShowST.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = ShowST.vsh; path = Shaders/ShowST.vsh; sourceTree = "<group>"; };
+		3149D311115B93BA00923D85 /* Brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Brick.png; sourceTree = "<group>"; };
+		3149D315115B93BA00923D85 /* Brick_mipmap_4.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brick_mipmap_4.pvr; sourceTree = "<group>"; };
+		3149D316115B93BA00923D85 /* candycane_scalar_disk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = candycane_scalar_disk.png; path = Textures/candycane_scalar_disk.png; sourceTree = "<group>"; };
+		3149D317115B93BA00923D85 /* diagnostic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = diagnostic.png; path = Textures/diagnostic.png; sourceTree = "<group>"; };
+		3149D318115B93BA00923D85 /* dylan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dylan.png; path = Textures/dylan.png; sourceTree = "<group>"; };
+		3149D319115B93BA00923D85 /* lena.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lena.png; path = Textures/lena.png; sourceTree = "<group>"; };
+		3149D31B115B93BA00923D85 /* mandrill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mandrill.png; sourceTree = "<group>"; };
+		3149D31F115B93BA00923D85 /* mandrill_flipped_for_pvr_mip_4.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = mandrill_flipped_for_pvr_mip_4.pvr; sourceTree = "<group>"; };
+		3149D321115B93BA00923D85 /* orientation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orientation.png; sourceTree = "<group>"; };
+		3149D325115B93BA00923D85 /* orientation_flipped_for_pvr_mip_4.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = orientation_flipped_for_pvr_mip_4.pvr; sourceTree = "<group>"; };
+		3149D327115B93BA00923D85 /* swirl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swirl.png; sourceTree = "<group>"; };
+		3149D32B115B93BA00923D85 /* swirl_flipped_for_pvr_mip_4.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = swirl_flipped_for_pvr_mip_4.pvr; sourceTree = "<group>"; };
+		3149D3DA115BA2CB00923D85 /* twitter_fail_whale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter_fail_whale.png; path = Textures/twitter_fail_whale.png; sourceTree = "<group>"; };
+		318ACEC6115A653500537373 /* EAGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLViewController.h; sourceTree = "<group>"; };
+		318ACEC7115A653500537373 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLViewController.m; sourceTree = "<group>"; };
+		318ACEF4115A67D400537373 /* EAGLViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
+		31931099115A89820052ABC0 /* HelloShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = HelloShader.fsh; path = Shaders/HelloShader.fsh; sourceTree = "<group>"; };
+		3193109A115A89820052ABC0 /* HelloShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = HelloShader.vsh; path = Shaders/HelloShader.vsh; sourceTree = "<group>"; };
+		319310B7115A89B90052ABC0 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ES2Renderer.h; path = Classes/ES2Renderer.h; sourceTree = "<group>"; };
+		319310B8115A89B90052ABC0 /* ES2Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ES2Renderer.m; path = Classes/ES2Renderer.m; sourceTree = "<group>"; };
+		319310B9115A89B90052ABC0 /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESRenderer.h; path = Classes/ESRenderer.h; sourceTree = "<group>"; };
+		319310BA115A89B90052ABC0 /* TEIRendererHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TEIRendererHelper.h; path = Classes/TEIRendererHelper.h; sourceTree = "<group>"; };
+		319310BB115A89B90052ABC0 /* TEIRendererHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TEIRendererHelper.m; path = Classes/TEIRendererHelper.m; sourceTree = "<group>"; };
+		31A19EEB115BDA2B0062EECE /* TEITexturePairShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = TEITexturePairShader.fsh; path = Shaders/TEITexturePairShader.fsh; sourceTree = "<group>"; };
+		31A19EEC115BDA2B0062EECE /* TEITexturePairShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = TEITexturePairShader.vsh; path = Shaders/TEITexturePairShader.vsh; sourceTree = "<group>"; };
+		31A912141163B8A000C28C26 /* TEITexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TEITexture.h; path = Classes/TEITexture.h; sourceTree = "<group>"; };
+		31A912151163B8A000C28C26 /* TEITexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TEITexture.m; path = Classes/TEITexture.m; sourceTree = "<group>"; };
+		31ACC70911A21C7E00BA9FC3 /* twitter_fail_whale_red_channnel_knockout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter_fail_whale_red_channnel_knockout.png; path = Textures/twitter_fail_whale_red_channnel_knockout.png; sourceTree = "<group>"; };
+		31AD161A115ABAFF00FAF0CA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		31F59E82115A636F00E16F62 /* ConstantsAndMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantsAndMacros.h; sourceTree = "<group>"; };
+		31F59E83115A636F00E16F62 /* JLMMatrixLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JLMMatrixLibrary.cpp; sourceTree = "<group>"; };
+		31F59E84115A636F00E16F62 /* JLMMatrixLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLMMatrixLibrary.h; sourceTree = "<group>"; };
+		31F59E85115A636F00E16F62 /* VectorMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorMatrix.cpp; sourceTree = "<group>"; };
+		31F59E86115A636F00E16F62 /* VectorMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorMatrix.h; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* HelloiPadGLSL_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloiPadGLSL_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* HelloiPadGLSL-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HelloiPadGLSL-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +116,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
 				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
+				31AD161B115ABAFF00FAF0CA /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,9 +126,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				31F59E81115A635A00E16F62 /* Vectors & Matrices */,
 				319E68601158F454001468D0 /* Renderer */,
 				28FD14FC0DC6FC130079059D /* EAGLView.h */,
 				28FD14FD0DC6FC130079059D /* EAGLView.m */,
+				318ACEC6115A653500537373 /* EAGLViewController.h */,
+				318ACEC7115A653500537373 /* EAGLViewController.m */,
 				1D3623240D0F684500981E51 /* HelloiPadGLSLAppDelegate.h */,
 				1D3623250D0F684500981E51 /* HelloiPadGLSLAppDelegate.m */,
 			);
@@ -107,8 +149,7 @@
 		2514C27610084DB600A42282 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				3142155F1159013C00266E56 /* TheImageEngineShaders */,
-				3142155E1159012D00266E56 /* OolongEngineShaders */,
+				3142155F1159013C00266E56 /* TheElasticImageShaders */,
 				2514C27910084DCA00A42282 /* Shader.fsh */,
 				2514C27A10084DCA00A42282 /* Shader.vsh */,
 			);
@@ -119,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				080E96DDFE201D6D7F000001 /* Classes */,
+				31AD168E115AC55E00FAF0CA /* Textures */,
 				2514C27610084DB600A42282 /* Shaders */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -140,7 +182,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				312405741226D49D0028D181 /* HelloiPadGLSLIcon.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				318ACEF4115A67D400537373 /* EAGLViewController.xib */,
 				8D1107310486CEB800E47090 /* HelloiPadGLSL-Info.plist */,
 			);
 			name = Resources;
@@ -153,47 +197,108 @@
 				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				31AD161A115ABAFF00FAF0CA /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3142155E1159012D00266E56 /* OolongEngineShaders */ = {
+		3142155F1159013C00266E56 /* TheElasticImageShaders */ = {
 			isa = PBXGroup;
 			children = (
-				31421543115900E800266E56 /* ColorVertShader.vsh */,
-				31421542115900E700266E56 /* ColorFragShader.fsh */,
-				31421545115900E800266E56 /* LightVertShader.vsh */,
-				31421544115900E800266E56 /* LightFragShader.fsh */,
-				31421547115900E800266E56 /* NormalMapVertShader.vsh */,
-				31421546115900E800266E56 /* NormalMapFragShader.fsh */,
-				31421549115900E800266E56 /* ParallaxMapVertShader.vsh */,
-				31421548115900E800266E56 /* ParallaxMapFragShader.fsh */,
-				3142154B115900E800266E56 /* TextureVertShader.vsh */,
-				3142154A115900E800266E56 /* TextureFragShader.fsh */,
-				3142154D115900E800266E56 /* VertexColorVertShader.vsh */,
-				3142154C115900E800266E56 /* VertexColorFragShader.fsh */,
+				31A19EEC115BDA2B0062EECE /* TEITexturePairShader.vsh */,
+				31A19EEB115BDA2B0062EECE /* TEITexturePairShader.fsh */,
+				3122A43C115AE1EA00530BAD /* TEITextureShader.vsh */,
+				3122A43B115AE1EA00530BAD /* TEITextureShader.fsh */,
+				3130CFF8115AAD69006DB509 /* ShowST.vsh */,
+				3130CFF7115AAD69006DB509 /* ShowST.fsh */,
+				3193109A115A89820052ABC0 /* HelloShader.vsh */,
+				31931099115A89820052ABC0 /* HelloShader.fsh */,
 			);
-			name = OolongEngineShaders;
+			name = TheElasticImageShaders;
 			sourceTree = "<group>";
 		};
-		3142155F1159013C00266E56 /* TheImageEngineShaders */ = {
+		3149D310115B93BA00923D85 /* Brick */ = {
 			isa = PBXGroup;
 			children = (
-				3142155B1159012700266E56 /* HelloShader.vsh */,
-				3142155A1159012700266E56 /* HelloShader.fsh */,
+				3149D311115B93BA00923D85 /* Brick.png */,
+				3149D315115B93BA00923D85 /* Brick_mipmap_4.pvr */,
 			);
-			name = TheImageEngineShaders;
+			name = Brick;
+			path = Textures/Brick;
+			sourceTree = "<group>";
+		};
+		3149D31A115B93BA00923D85 /* mandrill */ = {
+			isa = PBXGroup;
+			children = (
+				3149D31B115B93BA00923D85 /* mandrill.png */,
+				3149D31F115B93BA00923D85 /* mandrill_flipped_for_pvr_mip_4.pvr */,
+			);
+			name = mandrill;
+			path = Textures/mandrill;
+			sourceTree = "<group>";
+		};
+		3149D320115B93BA00923D85 /* orientation */ = {
+			isa = PBXGroup;
+			children = (
+				3149D321115B93BA00923D85 /* orientation.png */,
+				3149D325115B93BA00923D85 /* orientation_flipped_for_pvr_mip_4.pvr */,
+			);
+			name = orientation;
+			path = Textures/orientation;
+			sourceTree = "<group>";
+		};
+		3149D326115B93BA00923D85 /* swirl */ = {
+			isa = PBXGroup;
+			children = (
+				3149D327115B93BA00923D85 /* swirl.png */,
+				3149D32B115B93BA00923D85 /* swirl_flipped_for_pvr_mip_4.pvr */,
+			);
+			name = swirl;
+			path = Textures/swirl;
 			sourceTree = "<group>";
 		};
 		319E68601158F454001468D0 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
-				2514C27110084DB100A42282 /* ESRenderer.h */,
-				2514C26F10084DB100A42282 /* ES2Renderer.h */,
-				2514C27010084DB100A42282 /* ES2Renderer.m */,
+				319310B9115A89B90052ABC0 /* ESRenderer.h */,
+				319310B7115A89B90052ABC0 /* ES2Renderer.h */,
+				319310B8115A89B90052ABC0 /* ES2Renderer.m */,
+				31A912141163B8A000C28C26 /* TEITexture.h */,
+				31A912151163B8A000C28C26 /* TEITexture.m */,
+				319310BA115A89B90052ABC0 /* TEIRendererHelper.h */,
+				319310BB115A89B90052ABC0 /* TEIRendererHelper.m */,
 			);
 			name = Renderer;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		31AD168E115AC55E00FAF0CA /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				31ACC70911A21C7E00BA9FC3 /* twitter_fail_whale_red_channnel_knockout.png */,
+				3149D3DA115BA2CB00923D85 /* twitter_fail_whale.png */,
+				3149D316115B93BA00923D85 /* candycane_scalar_disk.png */,
+				3149D317115B93BA00923D85 /* diagnostic.png */,
+				3149D318115B93BA00923D85 /* dylan.png */,
+				3149D319115B93BA00923D85 /* lena.png */,
+				3149D310115B93BA00923D85 /* Brick */,
+				3149D31A115B93BA00923D85 /* mandrill */,
+				3149D320115B93BA00923D85 /* orientation */,
+				3149D326115B93BA00923D85 /* swirl */,
+			);
+			name = Textures;
+			sourceTree = "<group>";
+		};
+		31F59E81115A635A00E16F62 /* Vectors & Matrices */ = {
+			isa = PBXGroup;
+			children = (
+				31F59E82115A636F00E16F62 /* ConstantsAndMacros.h */,
+				31F59E86115A636F00E16F62 /* VectorMatrix.h */,
+				31F59E85115A636F00E16F62 /* VectorMatrix.cpp */,
+				31F59E84115A636F00E16F62 /* JLMMatrixLibrary.h */,
+				31F59E83115A636F00E16F62 /* JLMMatrixLibrary.cpp */,
+			);
+			name = "Vectors & Matrices";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,23 +343,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31A19EED115BDA2B0062EECE /* TEITexturePairShader.fsh in Resources */,
+				31A19EEE115BDA2B0062EECE /* TEITexturePairShader.vsh in Resources */,
+				3122A43D115AE1EA00530BAD /* TEITextureShader.fsh in Resources */,
+				3122A43E115AE1EA00530BAD /* TEITextureShader.vsh in Resources */,
+				3130CFF9115AAD69006DB509 /* ShowST.fsh in Resources */,
+				3130CFFA115AAD69006DB509 /* ShowST.vsh in Resources */,
 				2514C27B10084DCA00A42282 /* Shader.fsh in Resources */,
 				2514C27C10084DCA00A42282 /* Shader.vsh in Resources */,
-				3142154E115900E800266E56 /* ColorFragShader.fsh in Resources */,
-				3142154F115900E800266E56 /* ColorVertShader.vsh in Resources */,
-				31421550115900E800266E56 /* LightFragShader.fsh in Resources */,
-				31421551115900E800266E56 /* LightVertShader.vsh in Resources */,
-				31421552115900E800266E56 /* NormalMapFragShader.fsh in Resources */,
-				31421553115900E800266E56 /* NormalMapVertShader.vsh in Resources */,
-				31421554115900E800266E56 /* ParallaxMapFragShader.fsh in Resources */,
-				31421555115900E800266E56 /* ParallaxMapVertShader.vsh in Resources */,
-				31421556115900E800266E56 /* TextureFragShader.fsh in Resources */,
-				31421557115900E800266E56 /* TextureVertShader.vsh in Resources */,
-				31421558115900E800266E56 /* VertexColorFragShader.fsh in Resources */,
-				31421559115900E800266E56 /* VertexColorVertShader.vsh in Resources */,
-				3142155C1159012700266E56 /* HelloShader.fsh in Resources */,
-				3142155D1159012700266E56 /* HelloShader.vsh in Resources */,
+				3193109B115A89820052ABC0 /* HelloShader.fsh in Resources */,
+				3193109C115A89820052ABC0 /* HelloShader.vsh in Resources */,
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				318ACEF5115A67D400537373 /* EAGLViewController.xib in Resources */,
+				3149D32C115B93BA00923D85 /* Brick.png in Resources */,
+				3149D330115B93BA00923D85 /* Brick_mipmap_4.pvr in Resources */,
+				3149D331115B93BA00923D85 /* candycane_scalar_disk.png in Resources */,
+				3149D332115B93BA00923D85 /* diagnostic.png in Resources */,
+				3149D333115B93BA00923D85 /* dylan.png in Resources */,
+				3149D334115B93BA00923D85 /* lena.png in Resources */,
+				3149D335115B93BA00923D85 /* mandrill.png in Resources */,
+				3149D339115B93BA00923D85 /* mandrill_flipped_for_pvr_mip_4.pvr in Resources */,
+				3149D33A115B93BA00923D85 /* orientation.png in Resources */,
+				3149D33E115B93BA00923D85 /* orientation_flipped_for_pvr_mip_4.pvr in Resources */,
+				3149D33F115B93BA00923D85 /* swirl.png in Resources */,
+				3149D343115B93BA00923D85 /* swirl_flipped_for_pvr_mip_4.pvr in Resources */,
+				3149D3DB115BA2CB00923D85 /* twitter_fail_whale.png in Resources */,
+				31ACC70A11A21C7E00BA9FC3 /* twitter_fail_whale_red_channnel_knockout.png in Resources */,
+				312405751226D49D0028D181 /* HelloiPadGLSLIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +383,12 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* HelloiPadGLSLAppDelegate.m in Sources */,
 				28FD14FE0DC6FC130079059D /* EAGLView.m in Sources */,
-				2514C27310084DB100A42282 /* ES2Renderer.m in Sources */,
+				31F59E87115A636F00E16F62 /* JLMMatrixLibrary.cpp in Sources */,
+				31F59E88115A636F00E16F62 /* VectorMatrix.cpp in Sources */,
+				318ACEC8115A653500537373 /* EAGLViewController.m in Sources */,
+				319310BC115A89B90052ABC0 /* ES2Renderer.m in Sources */,
+				319310BD115A89B90052ABC0 /* TEIRendererHelper.m in Sources */,
+				31A912161163B8A000C28C26 /* TEITexture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +399,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos3.2]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;

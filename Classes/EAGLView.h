@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "ESRenderer.h"
+@class ES2Renderer;
 
 @interface EAGLView : UIView {    
 	
@@ -19,15 +19,15 @@
     // CADisplayLink will link to the main display and fire every vsync when added to a given run-loop.
     // The NSTimer class is used only as fallback when running on a pre 3.1 device where CADisplayLink
     // isn't available.
-    id				_displayLink;
-    id <ESRenderer>	_renderer;
-    BOOL			_animating;
+    id				m_displayLink;
+	ES2Renderer		*m_renderer;
+    BOOL			m_animating;
 	NSInteger		animationFrameInterval;
 	
 }
 
 @property(nonatomic,retain)id						displayLink;
-@property(nonatomic,retain)id <ESRenderer>			renderer;
+@property(nonatomic,retain)ES2Renderer				*renderer;
 @property(nonatomic,assign,getter=isAnimating)BOOL	animating;
 @property (nonatomic) NSInteger						animationFrameInterval;
 

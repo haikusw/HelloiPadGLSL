@@ -9,62 +9,88 @@
 #import "EAGLView.h"
 #import "ES2Renderer.h"
 
+@interface EAGLView (PrivateMethods)
+-(id)initializeEAGL;
+@end
+
 @implementation EAGLView
 
-@synthesize displayLink = _displayLink;
-@synthesize renderer = _renderer;
-@synthesize animating = _animating;
+@synthesize displayLink = m_displayLink;
+@synthesize renderer = m_renderer;
+@synthesize animating = m_animating;
 
 @dynamic animationFrameInterval;
 
-+ (Class)layerClass {
-    return [CAEAGLLayer class];
-}
-
 - (void)dealloc {
 	
-    [_displayLink	release], _displayLink	= nil;
-    [_renderer		release], _renderer		= nil;
+    [m_displayLink	release], m_displayLink	= nil;
+    [m_renderer		release], m_renderer		= nil;
 	
     [super dealloc];
 }
 
+-(id)initWithFrame:(CGRect)frame {
+	
+	NSLog(@"EAGL View - init With Frame: origin(%f %f) size(%f %f)", 
+		  frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+	
+    if ((self = [super initWithFrame:frame])) {
+		
+		self = [self initializeEAGL];
+		
+    } // if ((self = [super initWithFrame:frame]))
+	
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder*)coder {    
+	
+	NSLog(@"EAGL View - init With Coder");
 	
     if ((self = [super initWithCoder:coder])) {
 		
-        CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
-
-        eaglLayer.opaque = YES;
-        eaglLayer.drawableProperties = 
-		[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], 
-		 kEAGLDrawablePropertyRetainedBacking, 
-		 kEAGLColorFormatRGBA8, 
-		 kEAGLDrawablePropertyColorFormat, 
-		 nil];
-
-        self.renderer = [[[ES2Renderer alloc] init] autorelease];
-
-		if (!self.renderer) {
-			
-			[self release];
-			return nil;
-			
-		} // if (!self.renderer)
- 
-		self.animating			= NO;
-		animationFrameInterval = 1;
-		self.displayLink		= nil;
+		self = [self initializeEAGL];
 		
-        // A system version of 3.1 or greater is required to use CADisplayLink. 
-        NSString *currentSystemVersion = [[UIDevice currentDevice] systemVersion];
-        NSString *requiredSystemVersion = @"3.1";
-		
-		NSLog(@"CurrentSystem: %@ RequiredSystem: %@", currentSystemVersion, requiredSystemVersion);
-				
     } // if ((self = [super initWithCoder:coder]))
-
+	
     return self;
+}
+
+-(id)initializeEAGL {
+	
+	NSLog(@"EAGL View - initialize EAGL");
+	
+	CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
+	
+	NSLog(@"bounds: %f %f %f %f", eaglLayer.bounds.origin.x, eaglLayer.bounds.origin.y, eaglLayer.bounds.size.width, eaglLayer.bounds.size.height);
+	//	NSLog(@"transform");
+	//	NSLog(@"%f %f %f %f", eaglLayer.transform.m11, eaglLayer.transform.m12, eaglLayer.transform.m13, eaglLayer.transform.m14);
+	//	NSLog(@"%f %f %f %f", eaglLayer.transform.m21, eaglLayer.transform.m22, eaglLayer.transform.m23, eaglLayer.transform.m24);
+	//	NSLog(@"%f %f %f %f", eaglLayer.transform.m31, eaglLayer.transform.m32, eaglLayer.transform.m33, eaglLayer.transform.m34);
+	//	NSLog(@"%f %f %f %f", eaglLayer.transform.m41, eaglLayer.transform.m42, eaglLayer.transform.m43, eaglLayer.transform.m44);
+	
+	eaglLayer.opaque = TRUE;
+	eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
+									[NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking, 
+									kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, 
+									nil];
+	
+	self.renderer = [[[ES2Renderer alloc] init] autorelease];
+	
+	if (nil == self.renderer) {
+		
+		[self release];
+		
+		return self.renderer;
+		
+	} // if (nil == self.renderer)
+	
+	m_animating				= FALSE;
+	animationFrameInterval	= 1;
+	m_displayLink			= nil;
+	
+	return self;
+	
 }
 
 - (void)drawView:(id)sender {
@@ -74,7 +100,12 @@
 
 - (void)layoutSubviews {
 	
+	NSLog(@"EAGL View - layout Subviews");
+	
+	[self stopAnimation];
     [self.renderer resizeFromLayer:(CAEAGLLayer*)self.layer];
+	[self startAnimation];
+	
     [self drawView:nil];
 }
 
@@ -107,6 +138,8 @@
 
 - (void)startAnimation {
 	
+	NSLog(@"EAGL View - start Animation");
+	
     if (!self.isAnimating) {
 		
 		self.displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self selector:@selector(drawView:)];
@@ -130,6 +163,10 @@
 		
     } // if (self.isAnimating)
 	
+}
+
++ (Class)layerClass {
+    return [CAEAGLLayer class];
 }
 
 @end

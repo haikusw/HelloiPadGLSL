@@ -1,8 +1,8 @@
 //
 //  ESRenderer.h
-//  HelloiPadGLSL
+//  HelloiPhoneiPodTouchPanorama
 //
-//  Created by turner on 3/23/10.
+//  Created by turner on 2/25/10.
 //  Copyright Douglass Turner Consulting 2010. All rights reserved.
 //
 
@@ -13,7 +13,8 @@
 
 @protocol ESRenderer <NSObject>
 
-- (void)render;
-- (BOOL)resizeFromLayer:(CAEAGLLayer *)layer;
+- (void) setupGLView:(CGSize)size;
+- (void) render;
+- (BOOL) resizeFromLayer:(CAEAGLLayer *)layer;
 
 @end

@@ -8,39 +8,50 @@
 
 #import "HelloiPadGLSLAppDelegate.h"
 #import "EAGLView.h"
+#import "EAGLViewController.h"
 
 @implementation HelloiPadGLSLAppDelegate
 
-@synthesize window;
-@synthesize glView;
+@synthesize window		= m_window;
+@synthesize controller	= m_controller;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions   
-{
-    [glView startAnimation];
-    return YES;
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    [glView stopAnimation];
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    [glView startAnimation];
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    [glView stopAnimation];
-}
-
-- (void)dealloc
-{
-    [window release];
-    [glView release];
-
+- (void) dealloc {
+	
+    [m_window		release], m_window		= nil;
+    [m_controller	release], m_controller	= nil;
+	
     [super dealloc];
+}
+
+- (void) applicationDidFinishLaunching:(UIApplication *)application {
+
+	NSLog(@"Hello iPad GLSL AppDelegate - application Did Finish Launching");
+
+    [self.window addSubview:self.controller.view];
+    [self.window makeKeyAndVisible];
+	
+}
+
+- (void) applicationWillResignActive:(UIApplication *)application {
+	
+	NSLog(@"Hello iPad GLSL AppDelegate - application Will Resign Active - [glView stopAnimation]");
+	
+	EAGLView *glView = (EAGLView *)self.controller.view;
+	[glView stopAnimation];
+}
+
+- (void) applicationDidBecomeActive:(UIApplication *)application {
+	
+	NSLog(@"Hello iPad GLSL AppDelegate - application Did Become Active");
+	
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+	
+	NSLog(@"Hello iPad GLSL AppDelegate - application Will Terminate - [glView stopAnimation]");
+	
+	EAGLView *glView = (EAGLView *)self.controller.view;
+	[glView stopAnimation];
 }
 
 @end
