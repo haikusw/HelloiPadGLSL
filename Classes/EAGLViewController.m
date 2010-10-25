@@ -43,26 +43,34 @@
 	
 	EAGLView *glView = (EAGLView *)self.view;
 
-//	NSDictionary *texturePackage = nil;
+	TEITexture *texas = nil;
+	NSDictionary *texturePackage = nil;
 	
 	// PNG file output from a Photoshop. The source Photoshop file was rgb an attached mask.
-	TEITexture	*texture_0 = [[ [TEITexture alloc] initWithImageFile:@"photoshop-masked-transparency" 
-														  extension:@"png" 
-															 mipmap:NO ] autorelease];
+	texas = [[TEITexture alloc] initWithImageFile:@"photoshop-masked-transparency" extension:@"png" mipmap:NO];
 	
-//	texturePackage = [[NSDictionary alloc] initWithObjectsAndKeys:
-//					  texture_0, @"texture",
-//					  [NSNumber numberWithUnsignedInt:GL_TEXTURE0], @"activeTexture", 
-//					  [NSNumber numberWithInt:0, @"uniform", 
-//					  nil];
+	texturePackage = [[NSDictionary alloc] initWithObjectsAndKeys:
+					  texas, @"texture",
+					  [NSNumber numberWithUnsignedInt:GL_TEXTURE0], @"activeTexture", 
+					  [NSNumber numberWithInt:0], @"uniform", 
+					  nil];
 					  
-	[glView.renderer.rendererHelper.renderables setObject:texture_0 forKey:@"texture_0"];
+	[texas release];
 	
-	TEITexture	*texture_1 = [[ [TEITexture alloc] initWithImageFile:@"mandrill" 
-														  extension:@"png" 
-															 mipmap:YES ] autorelease];
-	[glView.renderer.rendererHelper.renderables setObject:texture_1 forKey:@"texture_1"];
+	[glView.renderer.rendererHelper.renderables setObject:texturePackage forKey:@"textureWithAlpha"];
+	[texturePackage release];
+					  
+	texas = [[TEITexture alloc] initWithImageFile:@"mandrill" extension:@"png" mipmap:YES ];
 
+	texturePackage = [[NSDictionary alloc] initWithObjectsAndKeys:
+					  texas, @"texture",
+					  [NSNumber numberWithUnsignedInt:GL_TEXTURE1], @"activeTexture", 
+					  [NSNumber numberWithInt:1], @"uniform", 
+					  nil];
+	[texas release];
+	
+	[glView.renderer.rendererHelper.renderables setObject:texturePackage forKey:@"heroTexture"];
+	[texturePackage release];
 	
 }
 

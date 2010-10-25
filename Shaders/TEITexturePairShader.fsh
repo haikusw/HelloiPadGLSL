@@ -9,15 +9,15 @@ precision highp float;
 
 varying	mediump vec2 v_st;
 
-uniform sampler2D	myTexture_0;
-uniform sampler2D	myTexture_1;
+uniform sampler2D	textureWithAlpha;
+uniform sampler2D	heroTexture;
 
 void main() {
 
-	vec4 dev_null = texture2D(myTexture_0, v_st);
+	vec4 dev_null = texture2D(textureWithAlpha, v_st);
 	
-	vec4 rgba_0 = texture2D(myTexture_0, v_st);	
-	vec4 rgba_1 = texture2D(myTexture_1, v_st);	
+	vec4 rgba_0 = texture2D(textureWithAlpha, v_st);	
+	vec4 rgba_1 = texture2D(heroTexture, v_st);	
 
 // My textures have pre-multiplied alpha. Use the Porter/Duff "over" operator
 // Use candycane_scalar_disk for texture 0 to see the effect.

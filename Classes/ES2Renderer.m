@@ -152,7 +152,23 @@ enum {
 
 	
     glUseProgram(m_program);
-		
+
+	TEITexture *texas				= nil;
+	NSDictionary *texturePackage	= nil;
+	
+	texturePackage = [self.rendererHelper.renderables objectForKey:@"textureWithAlpha"];
+	texas = [texturePackage objectForKey:@"texture"];
+	glActiveTexture( [[texturePackage objectForKey:@"activeTexture"] unsignedIntValue] );
+	glBindTexture(GL_TEXTURE_2D, texas.name);
+	glUniform1i(texas.location, [[texturePackage objectForKey:@"uniform"] intValue]);
+
+	texturePackage = [self.rendererHelper.renderables objectForKey:@"heroTexture"];
+	texas = [texturePackage objectForKey:@"texture"];
+	glActiveTexture( [[texturePackage objectForKey:@"activeTexture"] unsignedIntValue] );
+	glBindTexture(GL_TEXTURE_2D, texas.name);
+	glUniform1i(texas.location, [[texturePackage objectForKey:@"uniform"] intValue]);
+	
+
 	// M - World space
 	[self.rendererHelper setModelTransform:xform];
 	glUniformMatrix4fv(uniforms[ModelMatrixUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper modelTransform]);
@@ -260,14 +276,19 @@ enum {
     uniforms[ModelMatrixUniformHandle			] = glGetUniformLocation(m_program, "myModelMatrix");
     uniforms[SurfaceNormalMatrixUniformHandle	] = glGetUniformLocation(m_program, "mySurfaceNormalMatrix");
     
-	
+
+	NSString *key = nil;
 	TEITexture *t = nil;
+
+	key = @"textureWithAlpha";
+	NSDictionary *textureWithAlphaPackage = [self.rendererHelper.renderables objectForKey:key];
+	t = [textureWithAlphaPackage objectForKey:@"texture"];
+	t.location = glGetUniformLocation(m_program, [key cStringUsingEncoding:NSASCIIStringEncoding]);
 	
-	t = (TEITexture *)[self.rendererHelper.renderables objectForKey:@"texture_0"];
-	t.location = glGetUniformLocation(m_program, "myTexture_0");
-	
-	t = (TEITexture *)[self.rendererHelper.renderables objectForKey:@"texture_1"];
-	t.location = glGetUniformLocation(m_program, "myTexture_1");
+	key = @"heroTexture";
+	NSDictionary *heroTexturePackage = [self.rendererHelper.renderables objectForKey:key];
+	t = [heroTexturePackage objectForKey:@"texture"];
+	t.location = glGetUniformLocation(m_program, [key cStringUsingEncoding:NSASCIIStringEncoding]);
 	
 	
 	glEnable(GL_TEXTURE_2D);
@@ -297,17 +318,15 @@ enum {
 	
 	[self.rendererHelper placeCameraAtLocation:eye target:target up:up];
 
-	// Texture unit 0
-	t = (TEITexture *)[self.rendererHelper.renderables objectForKey:@"texture_0"];
-	glActiveTexture( GL_TEXTURE0 );
-	glBindTexture(GL_TEXTURE_2D, t.name);
-	glUniform1i(t.location, 0);
-	
-	// Texture unit 1
-	t = (TEITexture *)[self.rendererHelper.renderables objectForKey:@"texture_1"];
-	glActiveTexture( GL_TEXTURE1 );
-	glBindTexture(GL_TEXTURE_2D, t.name);
-	glUniform1i(t.location, 1);
+//	t = [textureWithAlphaPackage objectForKey:@"texture"];
+//	glActiveTexture( [[textureWithAlphaPackage objectForKey:@"activeTexture"] unsignedIntValue] );
+//	glBindTexture(GL_TEXTURE_2D, t.name);
+//	glUniform1i(t.location, [[textureWithAlphaPackage objectForKey:@"uniform"] intValue]);
+//	
+//	t = [heroTexturePackage objectForKey:@"texture"];
+//	glActiveTexture( [[heroTexturePackage objectForKey:@"activeTexture"] unsignedIntValue] );
+//	glBindTexture(GL_TEXTURE_2D, t.name);
+//	glUniform1i(t.location, [[heroTexturePackage objectForKey:@"uniform"] intValue]);
 	
 }
 
