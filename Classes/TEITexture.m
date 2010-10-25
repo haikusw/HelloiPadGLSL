@@ -7,8 +7,15 @@
 //
 
 #import "TEITexture.h"
+#import "Logging.h"
 
 static GLubyte checkImage[checkImageHeight][checkImageWidth][4];
+
+@interface TEITexture (PrivateMethods)
+
++ (NSString*)alphaDescriptionForAlphaInfo:(CGImageAlphaInfo)alphaInfo;
+
+@end
 
 @implementation TEITexture
 
@@ -99,6 +106,8 @@ static NGTextureFormat GetImageFormat(CGImageRef image) {
 	
 	CGImageAlphaInfo alpha = CGImageGetAlphaInfo(image);
 
+	DLog(@"%@", [TEITexture alphaDescriptionForAlphaInfo:alpha]);
+	
 	bool hasAlpha = FALSE;
 	hasAlpha = (alpha != kCGImageAlphaNone && alpha != kCGImageAlphaNoneSkipLast && alpha != kCGImageAlphaNoneSkipFirst);
 	
@@ -285,6 +294,7 @@ static uint8_t *GetImageData(CGImageRef image, NGTextureFormat format) {
 
 - (id)initWithTextureFile:(NSString *)name mipmap:(BOOL)mipmap {
 	
+
 	self = [super init];
 	
 	if(nil != self) {
@@ -294,34 +304,50 @@ static uint8_t *GetImageData(CGImageRef image, NGTextureFormat format) {
 		
 		if (ui_image.CGImage != NULL) {
 			
-			NGTextureFormat format	= GetImageFormat(ui_image.CGImage);
-			int glColor				= GetGLColor(format);
-			int glFormat			= GetGLFormat(format);
-			
-			m_width	= NextPowerOfTwo(CGImageGetWidth(ui_image.CGImage));
+			m_width		= NextPowerOfTwo(CGImageGetWidth( ui_image.CGImage));
 			m_height	= NextPowerOfTwo(CGImageGetHeight(ui_image.CGImage));
 			
-			uint8_t *data = GetImageData(ui_image.CGImage, format);
+			NGTextureFormat format	= GetImageFormat(ui_image.CGImage);
+			uint8_t *data			= GetImageData(ui_image.CGImage, format);
 			
 			glGenTextures(1, &m_name);
 			glBindTexture(GL_TEXTURE_2D, m_name);
 
-			
-			
+
 			// Wrap at texture boundaries
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 			
-			// lerp 4 nearest texels and lerp between pyramid levels.
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			int glColor		= GetGLColor(format);
+			int glFormat	= GetGLFormat(format);
+			if (YES == mipmap) {
+				
+				// lerp 4 nearest texels and lerp between pyramid levels.
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+				
+				// lerp 4 nearest texels.
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				
+				glTexImage2D(GL_TEXTURE_2D, 0, glColor, m_width, m_height, 0, glColor, glFormat, data);
+				
+				glGenerateMipmap( GL_TEXTURE_2D );
+				
+			} else {
+				
+				// Straight texture mapping. NO mipmaps thank you very much.
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				
+				glTexImage2D(GL_TEXTURE_2D, 0, glColor, m_width, m_height, 0, glColor, glFormat, data);
 			
-			// lerp 4 nearest texels.
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			}
+
 			
 			
-			glTexImage2D(GL_TEXTURE_2D, 0, glColor, m_width, m_height, 0, glColor, glFormat, data);
 			
-			glGenerateMipmap( GL_TEXTURE_2D );
+			
+			
 			
 			if(glGetError()) {
 				NSLog(@"TEI Texture - init With Texture File - glTexImage2D failed");
@@ -339,6 +365,8 @@ static uint8_t *GetImageData(CGImageRef image, NGTextureFormat format) {
 }
 
 - (id)initWithImageFile:(NSString *)name extension:(NSString *)extension mipmap:(BOOL)mipmap {
+
+	DLog(@"%@", name);
 	
 	NSString *fullPath = [[NSBundle mainBundle] pathForResource:name ofType:extension];
 
@@ -440,7 +468,7 @@ typedef struct m_PVRTexHeader {
 	
 	uint32_t w = 0;
 	uint32_t h = 0;
-	m_width	= w = CFSwapInt32LittleToHost(header->width);
+	m_width		= w = CFSwapInt32LittleToHost(header->width);
 	m_height	= h = CFSwapInt32LittleToHost(header->height);
 	
 	BOOL hasAlpha;
@@ -503,17 +531,14 @@ typedef struct m_PVRTexHeader {
 	
 	glGenTextures(1, &m_name);
 	glBindTexture(GL_TEXTURE_2D, m_name);
-		
-//	glTexEnvf(GL_TEXTURE_ENV, 
-//			  GL_TEXTURE_ENV_MODE, 
-//			  GL_REPLACE);	
+
 	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	
+
 	w = m_width;
 	h = m_height;
 	for (int i = 0; i < [m_pvrTextureData count]; i++) {
@@ -556,5 +581,44 @@ typedef struct m_PVRTexHeader {
 		}
 	}
 }
+
+
+#pragma mark -
+#pragma mark TEITexture Private Methods
+
++ (NSString*)alphaDescriptionForAlphaInfo:(CGImageAlphaInfo)alphaInfo {
+	
+	NSString* result = nil;
+	
+	switch (alphaInfo) {
+			
+		case kCGImageAlphaNone:
+			result = @"Alpha None";
+			break;
+		case kCGImageAlphaPremultipliedLast:
+			result = @"Alpha Premultiplied Last";
+			break;
+		case kCGImageAlphaPremultipliedFirst:
+			result = @"Alpha Premultiplied First";
+			break;
+		case kCGImageAlphaLast:
+			result = @"Alpha Last";
+			break;
+		case kCGImageAlphaFirst:
+			result = @"Alpha First";
+			break;
+		case kCGImageAlphaNoneSkipLast:
+			result = @"Alpha None Skip Last";
+			break;
+		case kCGImageAlphaNoneSkipFirst:
+			result = @"Alpha None Skip First";
+			break;
+		default:
+			result = @"Unknown Alpha Description";
+	}
+	
+	return result;
+};
+
 
 @end

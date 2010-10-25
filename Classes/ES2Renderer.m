@@ -167,6 +167,8 @@ enum {
 	// P * V * M - Projection space
 	JLMMatrix3DMultiply([self.rendererHelper projection], [self.rendererHelper viewModelTransform], [self.rendererHelper projectionViewModelTransform]);
 	glUniformMatrix4fv(uniforms[ProjectionViewModelUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper projectionViewModelTransform]);
+
+		
 	
 	
 	glEnableVertexAttribArray(VertexXYZAttributeHandle);
@@ -294,7 +296,7 @@ enum {
 	m3dLoadVector3f(up,		0.0f, 1.0f,   0.0f);
 	
 	[self.rendererHelper placeCameraAtLocation:eye target:target up:up];
-	
+
 	// Texture unit 0
 	t = (TEITexture *)[self.rendererHelper.renderables objectForKey:@"texture_0"];
 	glActiveTexture( GL_TEXTURE0 );

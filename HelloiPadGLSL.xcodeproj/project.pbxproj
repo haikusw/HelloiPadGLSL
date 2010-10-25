@@ -37,6 +37,7 @@
 		3149D3DB115BA2CB00923D85 /* twitter_fail_whale.png in Resources */ = {isa = PBXBuildFile; fileRef = 3149D3DA115BA2CB00923D85 /* twitter_fail_whale.png */; };
 		318ACEC8115A653500537373 /* EAGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 318ACEC7115A653500537373 /* EAGLViewController.m */; };
 		318ACEF5115A67D400537373 /* EAGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318ACEF4115A67D400537373 /* EAGLViewController.xib */; };
+		3192A13D1274E14A00DF1FF2 /* photoshop-masked-transparency.png in Resources */ = {isa = PBXBuildFile; fileRef = 3192A13C1274E14A00DF1FF2 /* photoshop-masked-transparency.png */; };
 		3193109B115A89820052ABC0 /* HelloShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 31931099115A89820052ABC0 /* HelloShader.fsh */; };
 		3193109C115A89820052ABC0 /* HelloShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3193109A115A89820052ABC0 /* HelloShader.vsh */; };
 		319310BC115A89B90052ABC0 /* ES2Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 319310B8115A89B90052ABC0 /* ES2Renderer.m */; };
@@ -85,6 +86,8 @@
 		318ACEC6115A653500537373 /* EAGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLViewController.h; sourceTree = "<group>"; };
 		318ACEC7115A653500537373 /* EAGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLViewController.m; sourceTree = "<group>"; };
 		318ACEF4115A67D400537373 /* EAGLViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EAGLViewController.xib; sourceTree = "<group>"; };
+		3192A0B51274D73C00DF1FF2 /* Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logging.h; path = ../HelloiPadPanorama/Classes/Logging.h; sourceTree = SOURCE_ROOT; };
+		3192A13C1274E14A00DF1FF2 /* photoshop-masked-transparency.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "photoshop-masked-transparency.png"; path = "Textures/photoshop-masked-transparency.png"; sourceTree = "<group>"; };
 		31931099115A89820052ABC0 /* HelloShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = HelloShader.fsh; path = Shaders/HelloShader.fsh; sourceTree = "<group>"; };
 		3193109A115A89820052ABC0 /* HelloShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = HelloShader.vsh; path = Shaders/HelloShader.vsh; sourceTree = "<group>"; };
 		319310B7115A89B90052ABC0 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ES2Renderer.h; path = Classes/ES2Renderer.h; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 			children = (
 				31F59E81115A635A00E16F62 /* Vectors & Matrices */,
 				319E68601158F454001468D0 /* Renderer */,
+				3192A0B51274D73C00DF1FF2 /* Logging.h */,
 				28FD14FC0DC6FC130079059D /* EAGLView.h */,
 				28FD14FD0DC6FC130079059D /* EAGLView.m */,
 				318ACEC6115A653500537373 /* EAGLViewController.h */,
@@ -275,6 +279,7 @@
 		31AD168E115AC55E00FAF0CA /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				3192A13C1274E14A00DF1FF2 /* photoshop-masked-transparency.png */,
 				31ACC70911A21C7E00BA9FC3 /* twitter_fail_whale_red_channnel_knockout.png */,
 				3149D3DA115BA2CB00923D85 /* twitter_fail_whale.png */,
 				3149D316115B93BA00923D85 /* candycane_scalar_disk.png */,
@@ -328,7 +333,14 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "HelloiPadGLSL" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -370,6 +382,7 @@
 				3149D3DB115BA2CB00923D85 /* twitter_fail_whale.png in Resources */,
 				31ACC70A11A21C7E00BA9FC3 /* twitter_fail_whale_red_channnel_knockout.png in Resources */,
 				312405751226D49D0028D181 /* HelloiPadGLSLIcon.png in Resources */,
+				3192A13D1274E14A00DF1FF2 /* photoshop-masked-transparency.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
