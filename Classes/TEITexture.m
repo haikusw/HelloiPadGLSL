@@ -11,7 +11,25 @@
 
 static GLubyte checkImage[checkImageHeight][checkImageWidth][4];
 
+typedef enum {
+	NGTextureFormat_Invalid = 0,
+	NGTextureFormat_A8,
+	NGTextureFormat_LA88,
+	NGTextureFormat_RGB_565,
+	NGTextureFormat_RGBA_5551,
+	NGTextureFormat_RGB_888,
+	NGTextureFormat_RGBA_8888,
+	NGTextureFormat_RGB_PVR2,
+	NGTextureFormat_RGB_PVR4,
+	NGTextureFormat_RGBA_PVR2,
+	NGTextureFormat_RGBA_PVR4,
+} NGTextureFormat;
+
 @interface TEITexture (PrivateMethods)
+
++ (NSString*)textureDescriptionFromNGTextureFormat:(NGTextureFormat)format;
++ (NSString*)glInternalDataFormatDescriptionFromNGTextureFormat:(NGTextureFormat)format;
++ (NSString*)glInternalColorFormatDescriptionFromNGTextureFormat:(NGTextureFormat)format;
 
 + (NSString*)alphaDescriptionForAlphaInfo:(CGImageAlphaInfo)alphaInfo;
 
@@ -33,33 +51,24 @@ static GLubyte checkImage[checkImageHeight][checkImageWidth][4];
 	[super dealloc];
 }
 
-typedef enum {
-		NGTextureFormat_Invalid = 0,
-		NGTextureFormat_A8,
-		NGTextureFormat_LA88,
-		NGTextureFormat_RGB_565,
-		NGTextureFormat_RGBA_5551,
-		NGTextureFormat_RGB_888,
-		NGTextureFormat_RGBA_8888,
-		NGTextureFormat_RGB_PVR2,
-		NGTextureFormat_RGB_PVR4,
-		NGTextureFormat_RGBA_PVR2,
-		NGTextureFormat_RGBA_PVR4,
-} NGTextureFormat;
-
 static int GetGLColor(NGTextureFormat format) {
 	
 	switch (format) {
-		case NGTextureFormat_RGBA_5551:
+			
 		case NGTextureFormat_RGB_888:
 		case NGTextureFormat_RGBA_8888:
+		case NGTextureFormat_RGBA_5551:
 			return GL_RGBA;
+			
 		case NGTextureFormat_RGB_565:
 			return GL_RGB;
+			
 		case NGTextureFormat_A8:
 			return GL_ALPHA;
+			
 		case NGTextureFormat_LA88:
 			return GL_LUMINANCE_ALPHA;
+			
 		default:
 			return 0;
 	}
@@ -308,6 +317,9 @@ static uint8_t *GetImageData(CGImageRef image, NGTextureFormat format) {
 			m_height	= NextPowerOfTwo(CGImageGetHeight(ui_image.CGImage));
 			
 			NGTextureFormat format	= GetImageFormat(ui_image.CGImage);
+			
+			DLog(@"Texture format %@", [TEITexture textureDescriptionFromNGTextureFormat:format]);
+			
 			uint8_t *data			= GetImageData(ui_image.CGImage, format);
 			
 			glGenTextures(1, &m_name);
@@ -320,7 +332,11 @@ static uint8_t *GetImageData(CGImageRef image, NGTextureFormat format) {
 
 			
 			int glColor		= GetGLColor(format);
+			DLog(@"GL Color %@", [TEITexture glInternalColorFormatDescriptionFromNGTextureFormat:glColor]);
+
 			int glFormat	= GetGLFormat(format);
+			DLog(@"GL Data %@", [TEITexture glInternalDataFormatDescriptionFromNGTextureFormat:glFormat]);
+
 			if (YES == mipmap) {
 				
 				// lerp 4 nearest texels and lerp between pyramid levels.
@@ -619,6 +635,101 @@ typedef struct m_PVRTexHeader {
 	
 	return result;
 };
+
++ (NSString*)textureDescriptionFromNGTextureFormat:(NGTextureFormat)format {
+	
+	NSString* result = nil;
+	
+	switch (format) {
+			
+		case NGTextureFormat_Invalid:
+			result = @"Invalid Texture Format";
+			break;
+		case NGTextureFormat_A8:
+			result = @"Alpha - 8 Texture";
+			break;
+		case NGTextureFormat_LA88:
+			result = @"Luminence Alpha - 8 8 Texture";
+			break;
+		case NGTextureFormat_RGB_565:
+			result = @"R G B - 5 6 5 Texture";
+			break;
+		case NGTextureFormat_RGBA_5551:
+			result = @"R G B A - 5 5 5 1 Texture";
+			break;
+		case NGTextureFormat_RGB_888:
+			result = @"R G B - 8 8 8 Texture";
+			break;
+		case NGTextureFormat_RGBA_8888:
+			result = @"R G B A - 8 8 8 8 Texture";
+			break;
+		case NGTextureFormat_RGB_PVR2:
+			result = @"R G B - PVR 2 bit Texture";
+			break;
+		case NGTextureFormat_RGB_PVR4:
+			result = @"R G B - PVR 4 bit Texture";
+			break;
+		case NGTextureFormat_RGBA_PVR2:
+			result = @"R G B A - PVR 2 bit Texture";
+			break;
+		case NGTextureFormat_RGBA_PVR4:
+			result = @"R G B A - PVR 4 bit Texture";
+			break;
+		default:
+			result = @"Unknown Texture Format";
+	}
+	
+	return result;
+};
+
++ (NSString*)glInternalDataFormatDescriptionFromNGTextureFormat:(NGTextureFormat)format {
+	
+	NSString* result = nil;
+	
+	switch (format) {
+			
+		case GL_UNSIGNED_BYTE:
+			result = @"GL Unsigned Byte";
+			break;
+		case GL_UNSIGNED_SHORT_5_5_5_1:
+			result = @"GL Unsigned Short 5 5 5 1";
+			break;
+		case GL_UNSIGNED_SHORT_5_6_5:
+			result = @"GL Unsigned Short 5 6 5";
+			break;
+		default:
+			result = @"Unknown Texture Format";
+	}
+	
+	return result;
+	
+}
+
++ (NSString*)glInternalColorFormatDescriptionFromNGTextureFormat:(NGTextureFormat)format {
+	
+	NSString* result = nil;
+	
+	switch (format) {
+			
+		case GL_RGBA:
+			result = @"GL R G B A";
+			break;
+		case GL_RGB:
+			result = @"GL R G B";
+			break;
+		case GL_ALPHA:
+			result = @"GL Alpha";
+			break;
+		case GL_LUMINANCE_ALPHA:
+			result = @"GL Luminance Alpha";
+			break;
+		default:
+			result = @"Unknown Texture Format";
+	}
+	
+	return result;
+	
+}
 
 
 @end

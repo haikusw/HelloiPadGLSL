@@ -31,9 +31,9 @@
 
 @property (nonatomic, retain) TEIRendererHelper *rendererHelper;
 
-- (void) render;
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer;
 - (void) setupGLView:(CGSize)size;
+- (void) render;
 
 @end
 

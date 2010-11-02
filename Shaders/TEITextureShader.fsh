@@ -9,18 +9,21 @@ precision highp float;
 
 varying	mediump vec2 v_st;
 
-uniform sampler2D	myTexture_0;
-uniform sampler2D	myTexture_1;
+//uniform sampler2D	myTexture_0;
+//uniform sampler2D	myTexture_1;
+
+uniform sampler2D	textureWithAlpha;
+uniform sampler2D	heroTexture;
 
 void main() {
 
-	vec4 dev_null = texture2D(myTexture_0, v_st);
+	vec4 dev_null = texture2D(textureWithAlpha, v_st);
 	
 	vec2 st;
 	st = v_st;
 	st.s *= 2.0;
 	st.t *= 3.0;
 	
-	gl_FragColor = texture2D(myTexture_1, st);
+	gl_FragColor = texture2D(heroTexture, st);
 	
 }

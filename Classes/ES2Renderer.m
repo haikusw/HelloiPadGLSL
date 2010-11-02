@@ -127,90 +127,6 @@ enum {
 	return self;
 }
 
-- (void) render {
-		
-    [EAGLContext setCurrentContext:m_context];
-    glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
-    glViewport(0, 0, m_backingWidth, m_backingHeight);
-    
-//    glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	static float angle = 0.0;
-	M3DMatrix44f rotation;
-	JLMMatrix3DSetRotationByDegrees(rotation, angle, 0.0, 0.0, 1.0);
-	angle += 1.0;	
-	
-	static float t = 0.0f;
-	M3DMatrix44f translation;
-	JLMMatrix3DSetTranslation(translation, 0.0, 0.0, (1.0) * cosf(t/4.0));
-	t += 0.075f/3.0;	
-    
-	M3DMatrix44f xform;
-	JLMMatrix3DMultiply(translation, rotation, xform);
-
-	
-    glUseProgram(m_program);
-
-	TEITexture *texas				= nil;
-	NSDictionary *texturePackage	= nil;
-	
-	texturePackage = [self.rendererHelper.renderables objectForKey:@"textureWithAlpha"];
-	texas = [texturePackage objectForKey:@"texture"];
-	glActiveTexture( [[texturePackage objectForKey:@"activeTexture"] unsignedIntValue] );
-	glBindTexture(GL_TEXTURE_2D, texas.name);
-	glUniform1i(texas.location, [[texturePackage objectForKey:@"uniform"] intValue]);
-
-	texturePackage = [self.rendererHelper.renderables objectForKey:@"heroTexture"];
-	texas = [texturePackage objectForKey:@"texture"];
-	glActiveTexture( [[texturePackage objectForKey:@"activeTexture"] unsignedIntValue] );
-	glBindTexture(GL_TEXTURE_2D, texas.name);
-	glUniform1i(texas.location, [[texturePackage objectForKey:@"uniform"] intValue]);
-	
-
-	// M - World space
-	[self.rendererHelper setModelTransform:xform];
-	glUniformMatrix4fv(uniforms[ModelMatrixUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper modelTransform]);
-	
-	// The surface normal transform is the inverse of M
-	glUniformMatrix4fv(uniforms[SurfaceNormalMatrixUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper surfaceNormalTransform]);
-
-	// V * M - Eye space
-	JLMMatrix3DMultiply([self.rendererHelper viewTransform], [self.rendererHelper modelTransform], [self.rendererHelper viewModelTransform]);
-	glUniformMatrix4fv(uniforms[ViewModelMatrixUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper viewModelTransform]);
-	
-	// P * V * M - Projection space
-	JLMMatrix3DMultiply([self.rendererHelper projection], [self.rendererHelper viewModelTransform], [self.rendererHelper projectionViewModelTransform]);
-	glUniformMatrix4fv(uniforms[ProjectionViewModelUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper projectionViewModelTransform]);
-
-		
-	
-	
-	glEnableVertexAttribArray(VertexXYZAttributeHandle);
-	glEnableVertexAttribArray(VertexSTAttributeHandle);
-	glEnableVertexAttribArray(VertexRGBAAttributeHandle);
-		
-	glVertexAttribPointer(VertexXYZAttributeHandle,		3, GL_FLOAT,			0, 0, verticesXYZ);
-	glVertexAttribPointer(VertexSTAttributeHandle,		2, GL_FLOAT,			0, 0, verticesST);
-	glVertexAttribPointer(VertexRGBAAttributeHandle,	4, GL_UNSIGNED_BYTE,	1, 0, verticesRGBA);
-	
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-	glDisableVertexAttribArray(VertexXYZAttributeHandle);
-	glDisableVertexAttribArray(VertexSTAttributeHandle);
-	glDisableVertexAttribArray(VertexRGBAAttributeHandle);
-	
-	
-	
-	
-	
-	// This application only creates a single color renderbuffer which is already bound at this point.
-	// This call is redundant, but needed if dealing with multiple renderbuffers.
-    glBindRenderbuffer(GL_RENDERBUFFER, m_colorbuffer);
-    [m_context presentRenderbuffer:GL_RENDERBUFFER];
-}
-
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer {
 	
 	NSLog(@"ES2Renderer - resize From Layer");
@@ -276,19 +192,23 @@ enum {
     uniforms[ModelMatrixUniformHandle			] = glGetUniformLocation(m_program, "myModelMatrix");
     uniforms[SurfaceNormalMatrixUniformHandle	] = glGetUniformLocation(m_program, "mySurfaceNormalMatrix");
     
-
+	
 	NSString *key = nil;
-	TEITexture *t = nil;
-
+//	TEITexture *t = nil;
+	GLuint location;
+	
 	key = @"textureWithAlpha";
 	NSDictionary *textureWithAlphaPackage = [self.rendererHelper.renderables objectForKey:key];
-	t = [textureWithAlphaPackage objectForKey:@"texture"];
-	t.location = glGetUniformLocation(m_program, [key cStringUsingEncoding:NSASCIIStringEncoding]);
+//	t = [textureWithAlphaPackage objectForKey:@"texture"];
+	location = glGetUniformLocation(m_program, [key cStringUsingEncoding:NSASCIIStringEncoding]);
+	glUniform1i(location, [[textureWithAlphaPackage objectForKey:@"uniform"] intValue]);
 	
 	key = @"heroTexture";
 	NSDictionary *heroTexturePackage = [self.rendererHelper.renderables objectForKey:key];
-	t = [heroTexturePackage objectForKey:@"texture"];
-	t.location = glGetUniformLocation(m_program, [key cStringUsingEncoding:NSASCIIStringEncoding]);
+//	t = [heroTexturePackage objectForKey:@"texture"];
+	location = glGetUniformLocation(m_program, [key cStringUsingEncoding:NSASCIIStringEncoding]);
+	glUniform1i(location, [[heroTexturePackage objectForKey:@"uniform"] intValue]);
+	
 	
 	
 	glEnable(GL_TEXTURE_2D);
@@ -317,17 +237,89 @@ enum {
 	m3dLoadVector3f(up,		0.0f, 1.0f,   0.0f);
 	
 	[self.rendererHelper placeCameraAtLocation:eye target:target up:up];
-
-//	t = [textureWithAlphaPackage objectForKey:@"texture"];
-//	glActiveTexture( [[textureWithAlphaPackage objectForKey:@"activeTexture"] unsignedIntValue] );
-//	glBindTexture(GL_TEXTURE_2D, t.name);
-//	glUniform1i(t.location, [[textureWithAlphaPackage objectForKey:@"uniform"] intValue]);
-//	
-//	t = [heroTexturePackage objectForKey:@"texture"];
-//	glActiveTexture( [[heroTexturePackage objectForKey:@"activeTexture"] unsignedIntValue] );
-//	glBindTexture(GL_TEXTURE_2D, t.name);
-//	glUniform1i(t.location, [[heroTexturePackage objectForKey:@"uniform"] intValue]);
 	
+	glEnableVertexAttribArray(VertexXYZAttributeHandle);
+	glEnableVertexAttribArray(VertexSTAttributeHandle);
+	glEnableVertexAttribArray(VertexRGBAAttributeHandle);
+	
+}
+
+- (void) render {
+		
+    [EAGLContext setCurrentContext:m_context];
+    glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
+    glViewport(0, 0, m_backingWidth, m_backingHeight);
+    
+//    glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	static float angle = 0.0;
+	M3DMatrix44f rotation;
+	JLMMatrix3DSetRotationByDegrees(rotation, angle, 0.0, 0.0, 1.0);
+	angle += 1.0;	
+	
+	static float t = 0.0f;
+	M3DMatrix44f translation;
+	JLMMatrix3DSetTranslation(translation, 0.0, 0.0, (1.0) * cosf(t/4.0));
+	t += 0.075f/3.0;	
+    
+	M3DMatrix44f xform;
+	JLMMatrix3DMultiply(translation, rotation, xform);
+
+	
+    glUseProgram(m_program);
+
+	// M - World space
+	[self.rendererHelper setModelTransform:xform];
+	glUniformMatrix4fv(uniforms[ModelMatrixUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper modelTransform]);
+	
+	// The surface normal transform is the inverse of M
+	glUniformMatrix4fv(uniforms[SurfaceNormalMatrixUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper surfaceNormalTransform]);
+
+	// V * M - Eye space
+	JLMMatrix3DMultiply([self.rendererHelper viewTransform], [self.rendererHelper modelTransform], [self.rendererHelper viewModelTransform]);
+	glUniformMatrix4fv(uniforms[ViewModelMatrixUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper viewModelTransform]);
+	
+	// P * V * M - Projection space
+	JLMMatrix3DMultiply([self.rendererHelper projection], [self.rendererHelper viewModelTransform], [self.rendererHelper projectionViewModelTransform]);
+	glUniformMatrix4fv(uniforms[ProjectionViewModelUniformHandle], 1, NO, (GLfloat *)[self.rendererHelper projectionViewModelTransform]);
+
+	
+	NSArray *textures = [NSArray arrayWithObjects:@"textureWithAlpha", @"heroTexture", nil];
+	for (NSString *tex in textures) {
+		
+		NSDictionary *texturePackage = [self.rendererHelper.renderables objectForKey:tex];
+		TEITexture *texas = [texturePackage objectForKey:@"texture"];
+		
+		glActiveTexture( [[texturePackage objectForKey:@"textureUnit"] unsignedIntValue] );
+		glBindTexture(GL_TEXTURE_2D, texas.name);
+		
+	} // for (textures)
+	
+	
+//	glEnableVertexAttribArray(VertexXYZAttributeHandle);
+//	glEnableVertexAttribArray(VertexSTAttributeHandle);
+//	glEnableVertexAttribArray(VertexRGBAAttributeHandle);
+		
+	glVertexAttribPointer(VertexXYZAttributeHandle,		3, GL_FLOAT,			0, 0, verticesXYZ);
+	glVertexAttribPointer(VertexSTAttributeHandle,		2, GL_FLOAT,			0, 0, verticesST);
+	glVertexAttribPointer(VertexRGBAAttributeHandle,	4, GL_UNSIGNED_BYTE,	1, 0, verticesRGBA);
+	
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+//	glDisableVertexAttribArray(VertexXYZAttributeHandle);
+//	glDisableVertexAttribArray(VertexSTAttributeHandle);
+//	glDisableVertexAttribArray(VertexRGBAAttributeHandle);
+	
+	
+	
+	
+	
+	// This application only creates a single color renderbuffer which is already bound at this point.
+	// This call is redundant, but needed if dealing with multiple renderbuffers.
+    glBindRenderbuffer(GL_RENDERBUFFER, m_colorbuffer);
+    [m_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 - (BOOL) loadShaders {

@@ -51,7 +51,7 @@
 	
 	texturePackage = [[NSDictionary alloc] initWithObjectsAndKeys:
 					  texas, @"texture",
-					  [NSNumber numberWithUnsignedInt:GL_TEXTURE0], @"activeTexture", 
+					  [NSNumber numberWithUnsignedInt:GL_TEXTURE0], @"textureUnit", 
 					  [NSNumber numberWithInt:0], @"uniform", 
 					  nil];
 					  
@@ -64,7 +64,7 @@
 
 	texturePackage = [[NSDictionary alloc] initWithObjectsAndKeys:
 					  texas, @"texture",
-					  [NSNumber numberWithUnsignedInt:GL_TEXTURE1], @"activeTexture", 
+					  [NSNumber numberWithUnsignedInt:GL_TEXTURE1], @"textureUnit", 
 					  [NSNumber numberWithInt:1], @"uniform", 
 					  nil];
 	[texas release];
