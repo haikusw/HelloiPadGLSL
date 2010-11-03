@@ -157,50 +157,50 @@ GLuint renderTextureID;
 	glGenFramebuffers(1, &m_framebuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
 	
-	checkGLError();
-	// Enable, generate, and bind texture
-	
-	glGenTextures (1, &renderTextureID);
- 	checkGLError();
-	
-	glBindTexture(GL_TEXTURE_2D, renderTextureID);
-	checkGLError();
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	checkGLError();
-	
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-	checkGLError();
-
-	GLsizei  width = layer.bounds.size.width;
-	GLsizei height = layer.bounds.size.height;
-
-	// Define the texture
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-
-	checkGLError();
-	
-	// Attach the texture to the fbo
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderTextureID, 0);
+//	checkGLError();
+//	// Enable, generate, and bind texture
+//	
+//	glGenTextures (1, &renderTextureID);
+// 	checkGLError();
+//	
+//	glBindTexture(GL_TEXTURE_2D, renderTextureID);
+//	checkGLError();
+//
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//
+//	checkGLError();
+//	
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//
+//	checkGLError();
+//
+//	GLsizei  width = layer.bounds.size.width;
+//	GLsizei height = layer.bounds.size.height;
+//
+//	// Define the texture
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+//
+//	checkGLError();
+//	
+//	// Attach the texture to the fbo
+//	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderTextureID, 0);
 	
 	// rgb buffer
-//	glGenRenderbuffers(1, &m_colorbuffer);
-//	glBindRenderbuffer(GL_RENDERBUFFER, m_colorbuffer);
-//	
-//	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorbuffer);
-//    [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
-//	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &m_backingWidth);
-//    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &m_backingHeight);
+	glGenRenderbuffers(1, &m_colorbuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, m_colorbuffer);
+	
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorbuffer);
+    [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
+	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &m_backingWidth);
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &m_backingHeight);
 	
 	// z-buffer
-//	glGenRenderbuffers(1, &m_depthbuffer);
-//	glBindRenderbuffer(GL_RENDERBUFFER, m_depthbuffer);
-//	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, m_backingWidth, m_backingHeight);	
-//	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthbuffer);
+	glGenRenderbuffers(1, &m_depthbuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, m_depthbuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, m_backingWidth, m_backingHeight);	
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthbuffer);
 	
 	checkFramebufferStatus();
 	
@@ -281,7 +281,6 @@ GLuint renderTextureID;
     glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
     glViewport(0, 0, m_backingWidth, m_backingHeight);
     
-//    glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
@@ -327,29 +326,17 @@ GLuint renderTextureID;
 		glBindTexture(GL_TEXTURE_2D, texas.name);
 		
 	} // for (textures)
-	
-	
-//	glEnableVertexAttribArray(VertexXYZAttributeHandle);
-//	glEnableVertexAttribArray(VertexSTAttributeHandle);
-//	glEnableVertexAttribArray(VertexRGBAAttributeHandle);
-		
+			
 	glVertexAttribPointer(VertexXYZAttributeHandle,		3, GL_FLOAT,			0, 0, verticesXYZ);
 	glVertexAttribPointer(VertexSTAttributeHandle,		2, GL_FLOAT,			0, 0, verticesST);
 	glVertexAttribPointer(VertexRGBAAttributeHandle,	4, GL_UNSIGNED_BYTE,	1, 0, verticesRGBA);
 	
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-//	glDisableVertexAttribArray(VertexXYZAttributeHandle);
-//	glDisableVertexAttribArray(VertexSTAttributeHandle);
-//	glDisableVertexAttribArray(VertexRGBAAttributeHandle);
-	
-	
-	
-	
 	
 	// This application only creates a single color renderbuffer which is already bound at this point.
 	// This call is redundant, but needed if dealing with multiple renderbuffers.
     glBindRenderbuffer(GL_RENDERBUFFER, m_colorbuffer);
+	
     [m_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
