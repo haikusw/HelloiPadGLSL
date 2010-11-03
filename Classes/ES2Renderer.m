@@ -13,6 +13,8 @@
 #import	"TEITexture.h"
 #import "TEIRendererHelper.h"
 
+bool checkFramebufferStatus();
+bool checkGLError();
 static const GLfloat verticesST[] = {
 	
 	0.0f, 0.0f,
@@ -127,6 +129,7 @@ enum {
 	return self;
 }
 
+GLuint renderTextureID;
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer {
 	
 	NSLog(@"ES2Renderer - resize From Layer");
@@ -150,29 +153,62 @@ enum {
 	}
 	
 	
-	// framebuffer
+	// Generate and bind fbo
 	glGenFramebuffers(1, &m_framebuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
 	
+	checkGLError();
+	// Enable, generate, and bind texture
+	
+	glGenTextures (1, &renderTextureID);
+ 	checkGLError();
+	
+	glBindTexture(GL_TEXTURE_2D, renderTextureID);
+	checkGLError();
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	checkGLError();
+	
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	checkGLError();
+
+	GLsizei  width = layer.bounds.size.width;
+	GLsizei height = layer.bounds.size.height;
+
+	// Define the texture
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+
+	checkGLError();
+	
+	// Attach the texture to the fbo
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderTextureID, 0);
+	
 	// rgb buffer
-	glGenRenderbuffers(1, &m_colorbuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, m_colorbuffer);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorbuffer);
-    [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
-	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &m_backingWidth);
-    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &m_backingHeight);
+//	glGenRenderbuffers(1, &m_colorbuffer);
+//	glBindRenderbuffer(GL_RENDERBUFFER, m_colorbuffer);
+//	
+//	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorbuffer);
+//    [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
+//	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &m_backingWidth);
+//    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &m_backingHeight);
 	
 	// z-buffer
-	glGenRenderbuffers(1, &m_depthbuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, m_depthbuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, m_backingWidth, m_backingHeight);	
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthbuffer);
+//	glGenRenderbuffers(1, &m_depthbuffer);
+//	glBindRenderbuffer(GL_RENDERBUFFER, m_depthbuffer);
+//	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, m_backingWidth, m_backingHeight);	
+//	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthbuffer);
 	
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-		
-		NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
-        return NO;
-    }
+	checkFramebufferStatus();
+	
+//    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+//		
+//		NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+//        return NO;
+//    }
     
 	[self setupGLView:layer.bounds.size];
 	
@@ -194,22 +230,17 @@ enum {
     
 	
 	NSString *key = nil;
-//	TEITexture *t = nil;
 	GLuint location;
 	
 	key = @"textureWithAlpha";
 	NSDictionary *textureWithAlphaPackage = [self.rendererHelper.renderables objectForKey:key];
-//	t = [textureWithAlphaPackage objectForKey:@"texture"];
 	location = glGetUniformLocation(m_program, [key cStringUsingEncoding:NSASCIIStringEncoding]);
 	glUniform1i(location, [[textureWithAlphaPackage objectForKey:@"uniform"] intValue]);
 	
 	key = @"heroTexture";
 	NSDictionary *heroTexturePackage = [self.rendererHelper.renderables objectForKey:key];
-//	t = [heroTexturePackage objectForKey:@"texture"];
 	location = glGetUniformLocation(m_program, [key cStringUsingEncoding:NSASCIIStringEncoding]);
 	glUniform1i(location, [[heroTexturePackage objectForKey:@"uniform"] intValue]);
-	
-	
 	
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
@@ -460,3 +491,67 @@ enum {
 }
 
 @end
+
+bool checkFramebufferStatus() {
+	
+    GLenum status = (GLenum)glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	
+    switch(status) {
+			
+        case GL_FRAMEBUFFER_COMPLETE:
+            return true;
+			
+        case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
+            printf("Framebuffer incomplete,incomplete attachment\n");
+            return false;
+			
+        case GL_FRAMEBUFFER_UNSUPPORTED:
+            printf("Unsupported framebuffer format\n");
+            return false;
+			
+        case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
+            printf("Framebuffer incomplete,missing attachment\n");
+            return false;
+			
+    }
+	
+	return false;
+}
+
+bool checkGLError() {
+	
+    GLenum status = (GLenum)glGetError();
+	
+    switch(status) {
+			
+        case GL_NO_ERROR:
+            return true;
+			
+        case GL_INVALID_ENUM:
+            printf("GL_INVALID_ENUM\n");
+            return false;
+			
+        case GL_INVALID_VALUE:
+            printf("GL_INVALID_VALUE\n");
+            return false;
+			
+        case GL_INVALID_OPERATION:
+            printf("GL_INVALID_OPERATION\n");
+            return false;
+			
+        case GL_STACK_OVERFLOW:
+            printf("GL_STACK_OVERFLOW\n");
+            return false;
+			
+        case GL_STACK_UNDERFLOW:
+            printf("GL_STACK_UNDERFLOW\n");
+            return false;
+			
+        case GL_OUT_OF_MEMORY:
+            printf("GL_OUT_OF_MEMORY\n");
+            return false;
+			
+    }
+	
+	return false;
+}
